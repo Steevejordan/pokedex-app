@@ -1,0 +1,18 @@
+<div class="login-container">
+	<h2>Bienvenue dans votre pokedex !</h2>
+	<p>Pour débuter, veuillez s'il vous plait entrez votre jeton d'entraineur et puis cliquez sur "Se connecter" .</p>
+	<form (ngSubmit)= "onLogin()">
+		<div class="form-group">
+			<label for="trainerToken">JETON D'ENTRAINEUR :</label>
+			<input 
+			type="text"
+			id="trainerToken"
+			name="trainerToken"
+			[(ngModel)]="trainerToken"
+			placeholder="Veuillez entrer votre jeton d'entraineur"
+			required 
+			/>
+		</div>
+		<button type="submit">Se connecter</button>
+	</form>
+</div>

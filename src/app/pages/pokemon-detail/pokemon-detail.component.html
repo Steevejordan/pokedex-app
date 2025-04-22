@@ -1,0 +1,26 @@
+<div class="detail-container" *ngIf="!isLoading && pokemon; else loadingTpl">
+  <h2>{{ pokemon.name | titlecase }}</h2>
+
+  <img [src]="pokemon.image" [alt]="pokemon.name" class="pokemon-image">
+
+  <div class="pokemon-info">
+    <p><strong>Genre :</strong> {{ pokemon.genre }}</p>
+    <p><strong>Poids :</strong> {{ pokemon.weight }} kg</p>
+    <p><strong>Taille :</strong> {{ pokemon.height }} m</p>
+    <p><strong>Description :</strong> {{ pokemon.description }}</p>
+    <p><strong>Types :</strong>
+      <span *ngIf="pokemon.types.length > 0; else noTypes">
+        {{ pokemon.types.join(', ') }}
+      </span>
+      <ng-template #noTypes>—</ng-template>
+    </p>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Chargement des données du Pokémon...</div>
+</ng-template>
+
+<ng-template #errorTpl>
+  <p class="error">{{ errorMessage }}</p>
+</ng-template>

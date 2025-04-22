@@ -1,0 +1,40 @@
+<div class="pokedex">
+  <h1>Bienvenue dans le pokédex !</h1>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Liste des Pokémon découverts -->
+  <div *ngIf="pokemons.length > 0; else noPokemons">
+    <div *ngFor="let pokemon of pokemons" class="pokemon-card">
+      
+      <!-- Nom et image du Pokémon avec lien vers détails -->
+      <a [routerLink]="['/pokemon', pokemon.id]" class="pokemon-link">
+        <h3>{{ pokemon.name }}</h3>
+        <img [src]="pokemon.image" [alt]="pokemon.name" />
+      </a>
+
+      <!-- Bouton pour capturer -->
+      <button 
+        (click)="capturePokemon(pokemon.id)" 
+        [disabled]="capturedIds.includes(pokemon.id)">
+        Capturer
+      </button>
+
+      <!-- Feedback visuel temporaire -->
+      <div *ngIf="capturedIds.includes(pokemon.id)" class="capture-feedback">
+        {{ pokemon.name }} capturé !
+      </div>
+    </div>
+  </div>
+
+  <!-- S'il n'y a pas de Pokémon à afficher -->
+  <ng-template #noPokemons>
+    <p>Aucun Pokémon à afficher pour le moment.</p>
+  </ng-template>
+
+  <!-- Bouton pour capturer automatiquement -->
+  <button (click)="autoCapturePokemons()">Capturer tous les Pokémon découverts</button>
+</div>
